@@ -42,8 +42,8 @@ int main() {
     }
     
     int rem = n % k;
-    int checking = 0;
     bool ans2 = true;
+    checking = 0;
     if (rem >= 2) {
         for (int i = 0; i < rem; i++) {
             if (checking > subs.at(i).at(quo)) {
