@@ -26,7 +26,6 @@ int main() {
     }
 
     int quo = n / k;
-    int rem = n % k;
     int checking = 0;
     bool complete = false;
     bool ans = true;
@@ -41,16 +40,17 @@ int main() {
         }
         if (complete) break;
     }
-
-    int checking2 = 0;
+    
+    int rem = n % k;
+    int checking = 0;
     bool ans2 = true;
     if (rem >= 2) {
         for (int i = 0; i < rem; i++) {
-            if (checking2 > subs.at(i).at(quo)) {
+            if (checking > subs.at(i).at(quo)) {
                 ans2 = false;
                 break;
             }
-            checking2 = subs.at(i).at(quo);
+            checking = subs.at(i).at(quo);
         }
     }
 
