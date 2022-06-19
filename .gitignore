@@ -40,3 +40,6 @@
 
 #.vscode
 .vscode
+
+#AtCoderの本番用ディレクトリ
+real_thing
