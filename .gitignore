@@ -43,3 +43,7 @@
 
 #AtCoderの本番用ディレクトリ
 real_thing
+
+#temp.cppとtemp.py
+temp.cpp
+temp.py
