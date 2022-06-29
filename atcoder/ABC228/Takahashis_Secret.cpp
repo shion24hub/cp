@@ -79,17 +79,20 @@ int main() {
     vector<int> a(n);
     rep(i, n) cin >> a.at(i);
 
-    int ans = 0;
-    map<int, int> counter;
-    int ind = x - 1;
+    vector<bool> counter(n, false);
+    int ind = x;
     while (true) {
-        ans ++;
-        if (counter.count(ind - 1)) counter[ind - 1] += 1;
-        else counter[ind - 1] = 1;
-        if (counter[ind - 1] > 1) {
+        if (counter.at(ind - 1)) {
             break;
+        } else {
+            counter.at(ind - 1) = true;
         }
         ind = a.at(ind - 1);
+    }
+
+    int ans = 0;
+    rep(i, n) {
+        if (counter.at(i)) ans ++;
     }
 
     cout << ans << endl;
