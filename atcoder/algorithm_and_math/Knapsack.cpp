@@ -73,29 +73,30 @@ void piimap(map<int, int> m, int mode_num = 0) {
 }
 
 int main() {
-    int n, w;
+
+    ll n, w;
     cin >> n >> w;
-    vector<int> weight(n), value(n);
-    rep(i, n) cin >> weight.at(i) >> value.at(i);
+    vector<ll> weight(n + 1), value(n + 1);
+    for (int i = 1; i <= n; i++) cin >> weight.at(i) >> value.at(i);
 
-    vector<vector<int>> dp(n + 1, vector<int>(w + 1, -1));
+    vector<vector<ll>> dp(n + 1, vector<ll>(w + 1));
+
     dp.at(0).at(0) = 0;
-    // for (int i = 1; i < w + 1; i++) {
-    //     dp.at(0).at(i) = -1;
-    // }
+    for (int i = 1; i <= n; i++) dp.at(0).at(i) = -(1LL << 60);
 
-    for (int i = 1; i < n + 1; i++) {
-        for (int j = 0; j < w + 1; j++) {
-            int ref = dp.at(i - 1).at(j);
-            //dp.at(i).at(j) = ref; 
-            if (ref >= 0) {
-                if (j + weight.at(i) <= w + 1) {
-                    dp.at(i).at(j + weight.at(i)) = max(ref + value.at(i), ref);
-                }
-            }
+    for (int i = 1; i <= n; i++){
+        for (int j = 0; j <= w; j++) {
+
+            // j < weight[i]のとき、品物iは選べない。
+            if (j < weight.at(i)) dp.at(i).at(j) = dp.at(i - 1).at(j);
+            if (j >= weight.at(i)) dp.at(i).at(j) = max(dp.at(i - 1).at(j), dp.at(i - 1).at(j - weight.at(i)) + value.at(i));
+
         }
     }
 
+    ll ans = 0;
+    for (int i = 0; i <= w; i++) ans = max(ans, dp.at(n).at(i));
+    cout << ans << endl;
 
     return 0;
 }
