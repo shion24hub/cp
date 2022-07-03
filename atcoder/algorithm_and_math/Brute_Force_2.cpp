@@ -73,22 +73,31 @@ void piimap(map<int, int> m, int mode_num = 0) {
 }
 
 int main() {
+
     int n, s;
     cin >> n >> s;
     vector<int> a(n);
     rep(i, n) cin >> a.at(i);
 
-    //bit全探索
-    for (int i = 0; i < pow(2, n); i++) {
-        vector<int> list;
-        for (int j = 0; j < n; j++) {
-            if ((i << j) & 1) list.push_back(a.at(i)); 
-        }
-
-        for(int k = 0; k < list.size(); k++) cout << list.at(i) << " ";
-        cout << endl; 
+    vector<vector<bool>> dp(n, vector<bool>(s + 1, false));
+    dp.at(0).at(0) = true;
+    if (a.at(0) <= s) {
+        dp.at(0).at(a.at(0)) = true;
     }
 
+    for (int i = 1; i < n; i++) {
+        for (int j = 0; j < s + 1; j++) {
+            if (dp.at(i - 1).at(j) == true) {
+                dp.at(i).at(j) = true;
+            }
+
+            if (a.at(i) <= s) {
+                dp.at(i).at(j) = true;
+            }
+
+            
+        }
+    }
 
 
     return 0;
