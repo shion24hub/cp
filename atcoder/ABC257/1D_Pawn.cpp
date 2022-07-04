@@ -85,14 +85,15 @@ int main() {
     }
 
     rep(i, q) {
-        int num = l[i];
         int counter = 0;
         int target_ind;
         rep(j, n) {
             if (masu[j]) counter ++;
-            if (counter == num) target_ind = j - 1; 
+            if (counter == l[i]) {
+                target_ind = j;
+                break;
+            }
         }
-        //cout << "target_ind = " << target_ind << endl;
         if (target_ind != n - 1) {
             if (masu[target_ind + 1] != true) {
                 masu[target_ind] = false;
