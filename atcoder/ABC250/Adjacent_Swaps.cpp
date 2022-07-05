@@ -74,6 +74,57 @@ void piimap(map<int, int> m, int mode_num = 0) {
 
 int main() {
     
+    int n, q;
+    cin >> n >> q;
+    vector<int> x(q);
+    rep(i, q) cin >> x[i];
+    
+    vector<int> a(n);
+    rep(i, n) {
+        a[i] = i + 1;
+    }
+
+    //pintvec(a, 1);
+
+    map<int, int> database;
+    rep(i, n) {
+        database[i + 1] = i;
+    }
+
+    //piimap(database, 1);
+
+    rep(i, q) {
+        //右端にあるか判断
+        if (database[x[i]] != n - 1) {
+            int tmp_ball = a[database[x[i]]];
+            int right_ball = a[database[x[i]] + 1];
+            a[database[x[i]]] = a[database[x[i]] + 1];
+            a[database[x[i]] + 1] = tmp_ball;
+
+            int tmp_ind = database[x[i]];
+            database[x[i]] = database[right_ball];
+            database[right_ball] = tmp_ind;
+        } else {
+            int tmp_ball = a[database[x[i]]];
+            int left_ball = a[database[x[i]] - 1];
+            a[database[x[i]]] = a[database[x[i]] - 1];
+            a[database[x[i]] - 1] = tmp_ball;
+
+            int tmp_ind = database[x[i]];
+            database[x[i]] = database[left_ball];
+            database[left_ball] = tmp_ind;
+        }
+        // cout << i + 1 << "回目のスワップ" << endl;
+        // rep(i, n) {
+        //     cout << a[i] << endl;
+        // }
+        // cout << endl;
+    }
+
+    rep(i, n) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
 
     return 0;
 }
